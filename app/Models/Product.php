@@ -21,8 +21,9 @@ public function subcategory()
     return $this->belongsTo(Subcategory::class,'subcategoryID');
 }
 
-public function order(){
-    return $this->hasMany(Order::class);
+
+public function items(){
+    return $this->hasMany(OrderItem::class);
 }
 
 }

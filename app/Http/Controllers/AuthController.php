@@ -30,12 +30,16 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
+            'phone'=>'required|string|max:15',
+            'address'=>'required|string|max:255'
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'phone'=>$validated['phone'],
+            'address'=>$validated['address']
         ]);
 
         Auth::login($user);
@@ -82,10 +86,15 @@ public function update(Request $request, User $user)
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email,' . $user->id,
         'password' => 'nullable|min:8|confirmed',
+          'phone'=>'required|string|max:15',
+            'address'=>'required|string|max:255'
     ]);
 
     $user->name = $request->name;
     $user->email = $request->email;
+    $user->phone = $request->phone;
+    $user->address = $request->address;
+
 
     if ($request->filled('password')) {
         $user->password = bcrypt($request->password);

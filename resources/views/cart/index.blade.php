@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .cart-item {
             border: 1px solid #ddd;
@@ -47,6 +47,23 @@
             transform: scale(1); /* Reset zoom-in effect */
             background-color: #7f1220; /* Even darker red on active */
         }
+        .buy-now-button {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .buy-now-button .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .buy-now-button .btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -65,9 +82,13 @@
         </div>
     @endif
 </div>
-    <div class="container">
-        <a href="{{ route('home') }}" class="back-button btn btn-danger">Back</a>
-        <h2 class="text-center">Your Shopping Cart</h2>
+
+<div class="container">
+    <a href="{{ route('home') }}" class="back-button btn btn-danger">Back</a>
+    <h2 class="text-center">Your Shopping Cart</h2>
+
+    @if($cartItems->count() > 0)
+        <!-- Cart Items -->
         @foreach ($cartItems as $item)
             <div class="cart-item">
                 <img src="{{ asset('storage/products/' . $item->product->image) }}" alt="{{ $item->product->name }}">
@@ -84,9 +105,17 @@
                 </div>
             </div>
         @endforeach
-    </div>
 
-    <script>
+        <!-- Buy Now Button -->
+        <div class="buy-now-button">
+        <a href="{{ route('user.buy.now', ['productId' => $item->product->id]) }}" class="btn btn-primary">Buy Now</a>
+        </div>
+    @else
+        <p>Your cart is empty.</p>
+    @endif
+</div>
+
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const removeButtons = document.querySelectorAll('.remove-item');
 
@@ -95,7 +124,6 @@
                 const form = this.closest('form'); 
                 const itemId = this.getAttribute('data-id'); 
 
-            
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "Once deleted, you can add again",
@@ -116,5 +144,6 @@
         });
     });
 </script>
+
 </body>
 </html>

@@ -54,7 +54,7 @@ Route::get('/cart', [CartController::class, 'showCart'])->name('cart.index');
 Route::delete('/user/cart/remove/{cartItemId}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/user/done',[CartController::class,'doneOrder'])->name('doneOrder');
 Route::get('/user/orders', [CartController::class, 'orders'])->name('orders');
-
+Route::get('/user/orderDetail/{orderID}',[CartController::class,'orderDetail'])->name('orderdetail');
 
 
 Route::get('/user/buy/{productId}', [CartController::class, 'buyNow'])->name('buy.now');

@@ -103,6 +103,33 @@
                 required>
         </div>
 
+        <!-- phone -->
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input 
+                type="phone" 
+                id="phone" 
+                name="phone" 
+                class="form-control" 
+                value="{{ old('phone', $user->phone) }}" 
+                placeholder="Enter phone" 
+                required>
+        </div>
+
+    <!-- address -->
+    <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input 
+                type="text" 
+                id="address" 
+                name="address" 
+                class="form-control" 
+                value="{{ old('address', $user->address) }}" 
+                placeholder="Enter address" 
+                required>
+        </div>
+
+
         <!-- Buttons -->
         <div class="custom-buttons">
             <a href="{{ route('users') }}" class="btn btn-secondary">Cancel</a>

@@ -7,6 +7,8 @@
     <ul class="list-group">
         <li class="list-group-item"><strong>Name:</strong> {{ auth()->user()->name }}</li>
         <li class="list-group-item"><strong>Email:</strong> {{ auth()->user()->email }}</li>
+        <li class="list-group-item"><strong>Phone:</strong> {{ auth()->user()->phone }}</li>
+        <li class="list-group-item"><strong>Adress:</strong> {{ auth()->user()->address }}</li>
         <li class="list-group-item"><strong>Joined on:</strong> {{ auth()->user()->created_at->format('d-m-Y') }}</li>
     </ul>
 </div>

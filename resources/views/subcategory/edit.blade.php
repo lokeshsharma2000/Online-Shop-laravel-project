@@ -174,18 +174,18 @@
 
                     <div class="mb-3">
                         <label class="form-label">Image Upload</label>
-                        <input class="form-control" type="file" name="image" id="formFile" required>
+                        <input class="form-control"  type="file" name="image" id="formFile" required>
                     </div>
 
 
                     <div class="mb-3">
                         <label class="form-label">Title</label>
-                        <input type="text" id="title" class="form-control" name="title" placeholder="Enter Title" required>
+                        <input type="text" id="title"  value="{{ $subcategory->title}}"  class="form-control" name="title" placeholder="Enter Title" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter description here"></textarea>                   
+                        <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter description here">{{ $subcategory->description}}</textarea>                   
                      </div>
                     
                     <div class="mb-3">

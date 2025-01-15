@@ -179,7 +179,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Title</label>
-                        <input type="text" id="title" class="form-control" name="title" placeholder="Enter Title" required>
+                        <input type="text" id="title" class="form-control" value="{{$category->title}}"  name="title" placeholder="Enter Title" required>
                     </div>
 
                     

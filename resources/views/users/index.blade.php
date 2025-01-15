@@ -11,6 +11,8 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
                 <th>Created At</th>
                 <th>Actions</th>
             </tr>
@@ -23,6 +25,8 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->phone }}</td>
+                    <td>{{ $user->address }}</td>
                     <td>{{ $user->created_at->format('Y-m-d') }}</td>
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">Edit</a>

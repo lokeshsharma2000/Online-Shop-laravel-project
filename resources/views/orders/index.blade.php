@@ -16,20 +16,19 @@
             <table class="table table-striped table-bordered" style="border-radius: 10px;">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Product</th>
-                        <th>Quantity</th>
+                        <th>Id</th>
+                        <th>User Name</th>
                         <th>Total Price</th>
                         <th>Status</th>
                         <th>Date</th>
+                        <th>Actions</th> 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->id }}</td>
-                        <td>{{ $order->product->title }}</td>
-                        <td>{{ $order->quantity }}</td>
+                        <td>{{$order->user->name}}</td>
                         <td>₹{{ number_format($order->totalPrice, 2) }}</td>
                         <td>
                             <span class="badge @if($order->status == 'Pending') badge-warning @elseif($order->status == 'Completed') badge-success @else badge-secondary @endif">
@@ -37,6 +36,9 @@
                             </span>
                         </td>
                         <td>{{ $order->created_at->format('d M Y, h:i A') }}</td>
+                        <td>
+                            <a href="{{route('user.orderdetail',['orderID'=>$order->id])}}" class="btn btn-info">Details</a> <!-- Details Button -->
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -122,7 +124,6 @@ h2 {
 }
 .btn-outline-primary:hover {
     background-color: #27ae60;
-
 }
 .btn-outline-primary {
     background-color: #2ecc71;
@@ -131,6 +132,19 @@ h2 {
     font-weight: 600;
 }
 
+/* Details button */
+.btn-info {
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 25px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #2980b9;
+}
 
 /* Responsive Table for Smaller Screens */
 @media (max-width: 768px) {

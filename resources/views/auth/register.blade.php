@@ -4,6 +4,20 @@
     <div class="header-container">
         <a href="javascript:history.back()" class="back-button">Back</a>
         <h2>Create an Account</h2>
+
+    <!-- Success Notification -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Error Notification -->
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     </div>
 
     <!-- Name Field -->
@@ -41,6 +55,17 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
+
+    <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="phone" id="phone" name="phone" required placeholder="phone">
+</div>
+
+
+<div class="form-group">
+    <label for="address">Address</label>
+    <input type="address" id="address" name="address" required placeholder="address">
+</div>
 
     <button type="submit" id="register-button">Register</button>
 </form>

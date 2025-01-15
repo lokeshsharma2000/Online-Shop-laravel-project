@@ -45,7 +45,7 @@ public function store(Request $request){
         'categoryID'=>'required|exists:category,id',
         'subcategoryID'=>'required|exists:subcategory,id',
         'price' => 'required|numeric|min:0',
-        'image' => 'nullable|image|mimes:jpg,jpeg,webp,png,gif|max:2048', 
+        'image' => 'nullable|image|mimes:jpg,jpeg,webp,png,gif,avif|max:2048', 
         'quantity' => 'nullable|integer|min:1'
      
     ]);
@@ -78,7 +78,7 @@ public function edit($id){
         'categoryID'=>'required|exists:category,id',
         'subcategoryID'=>'required|exists:subcategory,id',
         'price' => 'required|numeric|min:0',
-        'image' => 'nullable|image|mimes:jpg,jpeg,webp,png,gif|max:2048', 
+        'image' => 'nullable|image|mimes:jpg,jpeg,webp,png,gif,avif|max:2048', 
           'quantity' => 'nullable|integer|min:1'
       ]);
       
