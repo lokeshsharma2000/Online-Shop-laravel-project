@@ -122,9 +122,14 @@ h2 {
     margin-bottom: 20px;
     color: #212121;
 }
+.btn-outline-primary:hover {
+    background-color: #27ae60;
 
-/* Details button */
-.btn-info {
+}
+.btn-outline-primary {
+    background-color: #2ecc71;
+    border: none;
+    color: #fff;
     font-weight: 600;
     padding: 8px 16px;
     border-radius: 25px;
@@ -133,9 +138,6 @@ h2 {
     border: none;
 }
 
-.btn-info:hover {
-    background-color: #2980b9;
-}
 
 /* Responsive Table for Smaller Screens */
 @media (max-width: 768px) {
