@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Order;
 
 
 class ProductController extends Controller
@@ -108,5 +109,19 @@ $products->delete();
 return redirect()->route('admin.product.index')->with('success','product deleted successfully.');
    
 }
+// public function buyNow(Request $request, $productId)
+// {
+//     $product = Product::findOrFail($productId);
+
+//     if ($product->quantity < 1) {
+//         return redirect()
+//             ->back()
+//             ->with('error', 'This product is out of stock.');
+//     }
+
+
+//     return redirect()->route('user.buy.now.confirm',['productId' => $product->id])->with('success', 'You can proceed to checkout.');
+// }
+
 
 }

@@ -46,9 +46,20 @@ Route::prefix('admin')->name('admin.')->middleware('authenticate')->group(functi
 });
 Route::prefix('user')->name('user.')->middleware('user')->group(function () {
 Route::get('User',[UserController::class,'user'])->name('user.info');
+
+Route::get('/user/buy-now/{productId}/confirm', [CartController::class, 'buyNowConfirm'])->name('buy.now.confirm');
+Route::post('/user/buy-now/{productId}', [CartController::class, 'processBuyNow'])->name('buy.now.process');
 Route::get('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.index');
 Route::delete('/user/cart/remove/{cartItemId}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/user/done',[CartController::class,'doneOrder'])->name('doneOrder');
+Route::get('/user/orders', [CartController::class, 'orders'])->name('orders');
+
+
+
+Route::get('/user/buy/{productId}', [CartController::class, 'buyNow'])->name('buy.now');
+
+
 
 
 

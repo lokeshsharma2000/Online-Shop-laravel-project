@@ -55,7 +55,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <!-- <a class="navbar-brand" href="#">Brand</a> -->
+             
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
@@ -68,6 +68,7 @@
                 </li>
                 <li><a href="{{ route('user.user.info')}}">Profile</a></li>
                 <li><a href="{{route('user.cart.index')}}">Cart</a></li>
+                <li><a href="{{route('user.orders')}}">Orders</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
@@ -96,15 +97,13 @@
                         <p>Category: {{ $product->category->title }}</p>
                         <p>Type: {{ $product->subcategory->title }}</p>
                         <p class="price">₹{{ $product->price }}</p>
-                        <a href="#" class="btn-buy">Buy Now</a>
+                        <a href="{{route('user.buy.now',['productId' => $product->id])}}" class="btn-buy">Buy Now</a>
                         <a href="{{route('user.cart.add',['productId' => $product->id])}}" class="btn-buy">Add To Cart</a>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-
-
 
 </body>
 </html>
