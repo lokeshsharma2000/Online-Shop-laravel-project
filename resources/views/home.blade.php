@@ -119,18 +119,18 @@
                     <i class="bi bi-tags"></i> Categories
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="/orders">
                     <i class="bi bi-cart"></i> Orders
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.subcategory.index')}}">
                     <i class="bi bi-cart"></i> SubCategory
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/settings">
+                <a class="nav-link" href="{{route('showuser') }}">
                     <i class="bi bi-gear"></i> Settings
                 </a>
             </li>

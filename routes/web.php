@@ -39,13 +39,19 @@ Route::prefix('admin')->name('admin.')->middleware('authenticate')->group(functi
     Route::delete('Product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/get-subcategories', [ProductController::class, 'getSubcategories'])->name('getSubcategories');
 
-   
+   Route::get('/show-user',[AuthController::class,'showUser'])->name('showUser');
    
    
 
 });
 Route::prefix('user')->name('user.')->middleware('user')->group(function () {
 Route::get('User',[UserController::class,'user'])->name('user.info');
+Route::get('/show-user',[UserController::class,'showUser'])->name('showuser');
+Route::get('/user-edit',[UserController::class,'editUser'])->name('edituser');
+Route::delete('/user-delete/{user}',[UserController::class,'delete'])->name('delete');
+Route::put('/updateUser/{user}',[UserController::class,'updateUser'])->name('updateuser');
+
+
 
 Route::get('/user/buy-now/{productId}/confirm', [CartController::class, 'buyNowConfirm'])->name('buy.now.confirm');
 Route::post('/user/buy-now/{productId}', [CartController::class, 'processBuyNow'])->name('buy.now.process');
@@ -81,6 +87,11 @@ Route::get('/users/edit/{user}', [AuthController::class, 'edit'])->name('users.e
 Route::put('/users/{user}', [AuthController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [AuthController::class, 'destroy'])->name('users.destroy');
 Route::get('/home',[AuthController::class,'home'])->name('home');
+Route::get('/show-user',[AuthController::class,'showUser'])->name('showuser');
+Route::get('/user-edit',[AuthController::class,'editUser'])->name('edituser');
+Route::delete('/user-delete/{user}',[AuthController::class,'delete'])->name('delete');
+Route::put('/updateUser/{user}',[AuthController::class,'updateUser'])->name('updateuser');
+
 });
 
 
