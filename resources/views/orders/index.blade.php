@@ -6,7 +6,7 @@
         <div class="col-12">
             <h2 style="font-weight: 600; font-size: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
                 Your Orders
-                <a href="{{ url('/') }}" class="btn btn-outline-primary">Continue Shopping</a>
+                <a href="{{ url('/') }}" class="btn back-button">Continue Shopping</a>
             </h2>
         </div>
     </div>
@@ -122,15 +122,6 @@ h2 {
     margin-bottom: 20px;
     color: #212121;
 }
-.btn-outline-primary:hover {
-    background-color: #27ae60;
-}
-.btn-outline-primary {
-    background-color: #2ecc71;
-    border: none;
-    color: #fff;
-    font-weight: 600;
-}
 
 /* Details button */
 .btn-info {
@@ -157,5 +148,32 @@ h2 {
         font-size: 1.7rem;
     }
 }
+
+.back-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 20px;
+        margin-bottom:2px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #ff4d4d; /* Red background color */
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-right: 20px;
+        margin-left: 50px;
+
+    }
+
+    .back-button:hover {
+        background-color: #cc0000; /* Darker red on hover */
+        transform: translateY(-1px); /* Slight lift effect */
+    }
+
+    .back-button:active {
+        background-color: #a30000; /* Even darker red when clicked */
+        transform: translateY(0); /* Button pressed effect */
+    }
 </style>
 @endsection

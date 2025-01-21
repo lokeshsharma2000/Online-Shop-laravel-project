@@ -111,6 +111,45 @@ public function destroy(User $user)
     return redirect()->route('users')->with('success', 'User deleted successfully.');
 }
 
+public function showUser(User $user){
+
+    return view('setting.index');
+}
+
+public function editUser(User $user){
+    return view('setting.edit');
+}
+
+public function delete(User $user)
+{
+   $user->delete();
+
+    return redirect()->route('login')->with('success', 'User deleted successfully.');
+}
+public function updateUser(Request $request, User $user)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+         'password' => 'nullable|min:8|confirmed',
+          'phone'=>'required|string|max:15',
+            'address'=>'required|string|max:255'
+    ]);
+
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->phone = $request->phone;
+    $user->address = $request->address;
+
+
+    if ($request->filled('password')) {
+        $user->password = bcrypt($request->password);
+    }
+
+    $user->save();
+
+    return redirect()->route('showuser')->with('success', 'User updated successfully.');
+}
 
 }
 
