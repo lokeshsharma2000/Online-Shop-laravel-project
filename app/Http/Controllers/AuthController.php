@@ -112,6 +112,11 @@ public function destroy(User $user)
 }
 public function showUser(User $user){
 
+<<<<<<< HEAD
+=======
+public function showUser(User $user){
+
+>>>>>>> 48f9fc284b67a76d0ee92143c1f14946f2fa5a3e
     return view('setting.index');
 }
 

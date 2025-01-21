@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 48f9fc284b67a76d0ee92143c1f14946f2fa5a3e
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,6 +20,10 @@ public function index()
     // return $products;
     return view('products.index', compact('products'));
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 48f9fc284b67a76d0ee92143c1f14946f2fa5a3e
 public function showUser(User $user){
 
     return view('profile.index');
@@ -53,6 +61,10 @@ public function updateUser(Request $request, User $user)
 
     $user->save();
 
+<<<<<<< HEAD
     return redirect()->route('user.showuser')->with('success', 'Detail updated successfully.');
+=======
+    return redirect()->route('showuser')->with('success', 'Detail updated successfully.');
+>>>>>>> 48f9fc284b67a76d0ee92143c1f14946f2fa5a3e
 }
 }
