@@ -74,7 +74,9 @@
                 @if(Auth::check())
                     <li><a href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <span class="glyphicon glyphicon-log-out"></span> Logout
+                        <span class="glyphicon glyphicon-log-out">
+                            
+                        </span> Logout <span style="color: white;">{{ auth()->user()->name }}</span>
                     </a></li>
                     <form id="logout-form" action="{{ route('logout') }}" style="display: none;">
                         @csrf
@@ -87,10 +89,10 @@
         </div>
     </nav>
     <div class="container">
-        <h2 class="text-center">Shop - Product List</h2>
+        <h2 class="text-center">Products</h2>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="product-card">
                         <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->title }}">
                         <h5>{{ $product->title }}</h5>

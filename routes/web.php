@@ -9,7 +9,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\RatingController;
 
 
 
@@ -61,10 +61,13 @@ Route::delete('/user/cart/remove/{cartItemId}', [CartController::class, 'remove'
 Route::get('/user/done',[CartController::class,'doneOrder'])->name('doneOrder');
 Route::get('/user/orders', [CartController::class, 'orders'])->name('orders');
 Route::get('/user/orderDetail/{orderID}',[CartController::class,'orderDetail'])->name('orderdetail');
-
-
 Route::get('/user/buy/{productId}', [CartController::class, 'buyNow'])->name('buy.now');
 
+
+
+
+Route::get('/orders/{orderId}/products/{productId}/rating', [RatingController::class, 'showRating'])->name('ratings.show');
+Route::post('/orders/{orderId}/products/{productId}/rate', [RatingController::class, 'store'])->name('ratings.store');
 
 
 

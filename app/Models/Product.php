@@ -26,4 +26,9 @@ public function items(){
     return $this->hasMany(OrderItem::class);
 }
 
+public function productRating()
+{
+    return $this->hasMany(Rating::class);
+}
+
 }
