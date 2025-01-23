@@ -24,10 +24,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('category', 'subcategory')->get();
-        // return $products;
+       
+        $products = Product::with('category', 'subcategory') 
+            ->get();
         return view('products.index', compact('products'));
     }
+    
         
     public function create(Request $request)
     {   $categories=Category::all();

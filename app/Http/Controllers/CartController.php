@@ -109,7 +109,7 @@ class CartController extends Controller
         // Update product stock
         $product->update(['quantity' => $product->quantity - $quantity]);
 
-       $email= Mail::to($user->email)->send(new OrderConfirmationMail($user));
+    //    $email= Mail::to($user->email)->send(new OrderConfirmationMail($user));
 
 
         return redirect()->route('user.doneOrder')->with('success', 'Your purchase was successful!');

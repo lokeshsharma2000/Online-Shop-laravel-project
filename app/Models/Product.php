@@ -28,7 +28,7 @@ public function items(){
 
 public function productRating()
 {
-    return $this->hasMany(Rating::class);
+    return $this->hasMany(Rating::class,'productID');
 }
 
 }

@@ -43,6 +43,21 @@
         .btn-buy:hover {
             background-color: #e64a19;
         }
+
+                .rating {
+            display: flex;
+            align-items: center;
+            margin-left: 80px;
+            margin-bottom: 10px;
+        }
+        .star {
+            font-size: 18px;
+            color: #ccc;
+        }
+        .star.filled {
+            color: gold;
+        }
+
     </style>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -92,17 +107,26 @@
         <h2 class="text-center">Products</h2>
         <div class="row">
             @foreach ($products as $product)
-                <div class="col-md-4">
-                    <div class="product-card">
-                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->title }}">
-                        <h5>{{ $product->title }}</h5>
-                        <p>Category: {{ $product->category->title }}</p>
-                        <p>Type: {{ $product->subcategory->title }}</p>
-                        <p class="price">₹{{ $product->price }}</p>
-                        <a href="{{route('user.buy.now',['productId' => $product->id])}}" class="btn-buy">Buy Now</a>
-                        <a href="{{route('user.cart.add',['productId' => $product->id])}}" class="btn-buy">Add To Cart</a>
-                    </div>
-                </div>
+            <div class="col-md-4">
+    <div class="product-card">
+        <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->title }}">
+        <h5>{{ $product->title }}</h5>
+        <p>Category: {{ $product->category->title }}</p>
+        <p>Type: {{ $product->subcategory->title }}</p>
+        <p class="price">₹{{ $product->price }}</p>
+
+        <div class="rating">
+        @for ($i = 1; $i <= 5; $i++)
+            <span class="star {{ $i <= $product->average_rating ? 'filled' : '' }}">&#9733;</span>
+        @endfor
+        <span>{{ $product->average_rating }} / 5</span>
+    </div>
+
+        <a href="{{ route('user.buy.now', ['productId' => $product->id]) }}" class="btn-buy">Buy Now</a>
+        <a href="{{ route('user.cart.add', ['productId' => $product->id]) }}" class="btn-buy">Add To Cart</a>
+    </div>
+</div>
+
             @endforeach
         </div>
     </div>
