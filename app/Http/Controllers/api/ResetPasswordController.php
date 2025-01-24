@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\PasswordResetMail;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
+
 
 class ResetPasswordController extends Controller
 {
@@ -18,25 +21,26 @@ class ResetPasswordController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
             'password' => 'required|string|min:8',
-            'token' => 'required|string',
         ]);
-
+    
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors(), 400);
         }
-
-        $status = Password::reset(
-            $request->only('email', 'password', 'token'),
-            function ($user, $password) {
-                $user->password = Hash::make($password);
-                $user->save();
-            }
-        );
-
-        return $status === Password::PASSWORD_RESET
-            ? response()->json(['status' => __($status)], 200)
-            : response()->json(['email' => __($status)], 500);
+    
+        // Find the user by email
+        $user = User::where('email', $request->email)->first();
+    
+        if ($user) {
+            // Update the user's password
+            $user->password = Hash::make($request->password);
+            $user->save();
+    
+            return response()->json(['status' => 'Password reset successfully'], 200);
+        }
+    
+        return response()->json(['email' => 'User not found'], 400);
     }
+    
     public function sendResetLink(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -44,10 +48,39 @@ class ResetPasswordController extends Controller
         ]);
     
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors(), 400);
         }
+    
         $user = User::where('email', $request->email)->first();
-        Mail::to($user->email)->send(new PasswordResetMail($user));
-        return response()->json(['status' => 'Password reset link sent successfully.'], 200);
+        $otp = rand(1111, 9999); 
+        $user->otp = $otp;
+        $user->save();
+    
+        Mail::to($user->email)->send(new PasswordResetMail($user->email, $otp));
+    
+        return response()->json(['status' => 'OTP sent successfully.'], 200);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'otp' => 'required|string',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+    
+        $user = User::where('email', $request->email)->first();
+    
+        if ($user && $user->otp == $request->otp) {
+            $user->otp = null;
+            $user->save();
+    
+            return response()->json(['status' => 'OTP verified successfully.'], 200);
+        }
+    
+        return response()->json(['error' => 'Invalid or expired OTP.'], 400);
     }
 }
