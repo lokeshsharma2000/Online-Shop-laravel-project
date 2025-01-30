@@ -74,7 +74,7 @@
              
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="{{ route('home')}}">Home</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('user.showuser')}}">Edit Profile</a></li>
@@ -105,6 +105,10 @@
     </nav>
     <div class="container">
         <h2 class="text-center">Products</h2>
+        <form action="{{ route('products.search') }}" method="GET" class="form-inline text-center" style="margin-bottom: 20px;">
+        <input type="text" name="query" class="form-control" placeholder="Search products..." required>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
         <div class="row">
             @foreach ($products as $product)
             <div class="col-md-4">

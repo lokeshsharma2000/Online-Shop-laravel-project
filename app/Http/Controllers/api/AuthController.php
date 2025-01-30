@@ -18,7 +18,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
             'phone' => 'required|string|max:15',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255'      
         ]);
 
         if ($validator->fails()) {
@@ -64,8 +64,20 @@ class AuthController extends Controller
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
-    public function passwordReset(Request $request)
+    public function searchProduct(Request $request)
     {
-      
+        $query = $request->input('query');
+    
+
+        $products = Product::where('title', 'LIKE', "%{$query}%")
+            ->orWhereHas('category', function ($q) use ($query) {
+                $q->where('title', 'LIKE', "%{$query}%");
+            })
+            ->orWhereHas('subcategory', function ($q) use ($query) {
+                $q->where('title', 'LIKE', "%{$query}%");
+            })
+            ->get();
+    
+        return view('products', compact('products'));
     }
 }

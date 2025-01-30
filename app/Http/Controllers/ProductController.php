@@ -125,5 +125,21 @@ return redirect()->route('admin.product.index')->with('success','product deleted
 //     return redirect()->route('user.buy.now.confirm',['productId' => $product->id])->with('success', 'You can proceed to checkout.');
 // }
 
+public function searchProduct(Request $request)
+{
+    $query = $request->input('query');
+
+
+    $products = Product::where('title', 'LIKE', "%{$query}%")
+        ->orWhereHas('category', function ($q) use ($query) {
+            $q->where('title', 'LIKE', "%{$query}%");
+        })
+        ->orWhereHas('subcategory', function ($q) use ($query) {
+            $q->where('title', 'LIKE', "%{$query}%");
+        })
+        ->get();
+
+    return view('welcome', compact('products'));
+}
 
 }
